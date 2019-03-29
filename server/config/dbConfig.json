@@ -1,0 +1,9 @@
+{
+    "CONNECTION_STRING": {
+                            "HOST": "localhost",
+                            "PORT": "27017",
+                            "USERNAME": "ex1",
+                            "PASSWORD": ""  
+                        },
+    "DATABASE": "ex1"
+}
