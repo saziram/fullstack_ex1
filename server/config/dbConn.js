@@ -6,8 +6,8 @@ const url = "mongodb://" + dbConfig.CONNECTION_STRING.HOST + ":" + dbConfig.CONN
 //mongoose connection
 mongoose.connect(url, {useNewUrlParser: true})
 		.then( () => {
-            console.info("DB Connected Successfully")			            
+            console.log("DB Connected Successfully".green);			            
 		})
 		.catch( err => {
-			console.error("Connection error ", err)
-		});
+            console.log('Connection error'.red, err);
+        });  
