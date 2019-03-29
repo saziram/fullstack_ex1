@@ -20,7 +20,7 @@ app.use(router);
 mongoose.connect(url, {useNewUrlParser: true})
 		.then( () => {
             console.log("DB Connected Successfully".green);	
-            app.listen(process.env.PORT || 4000,() => {
+            app.listen(process.env.PORT || 4000, () => {
                 dotENV.config({ path: "./.env" });    
                 console.log('Server listening at 4000'.green);
             });            		            
