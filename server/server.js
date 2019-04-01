@@ -17,7 +17,7 @@ app.use(headers);
 app.use(router);
 
 //mongoose connection
-mongoose.connect(url, {useNewUrlParser: true})
+mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true})
 		.then( () => {
             console.log("DB Connected Successfully".green);	
             app.listen(process.env.PORT || 4000, () => {
