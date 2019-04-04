@@ -1,4 +1,4 @@
-const { Users, Topics, Questions, Answers, Comments } = require('./schema'), 
+const model = { Users, Topics, Questions, Answers, Comments } = require('./schema'), 
 dateFormatter = require('./../helper/dateFormatter'),
 { errorHandling } = require('./errorHandling');
 
@@ -118,22 +118,8 @@ module.exports = {
     },
     //COMMON UPDATE HANDLERS         
     updateHandler: (condition, postBody, reqModel) => {	
-        var model;
-        switch (reqModel) {
-            case 'topic':
-              model = Topics;
-              break;
-            case 'question':
-              model = Questions;
-              break;
-            case 'answer':
-              model = Answers;
-              break; 
-            case 'comment':
-              model = Comments;
-              break;                              
-          }
-        return model
+        let updateModel = model[reqModel];
+        return updateModel
             .updateOne(condition, postBody, {upsert:true})
             .then(
                 results => results   

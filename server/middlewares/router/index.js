@@ -8,7 +8,6 @@ router.use('/questions', require('./questions'));
 router.use('/answers', require('./answers'));
 
 router.get('/login', function (req, res) {
- process.env.USER_ID = req.headers['userid'];
  model.login(req.body)
       .then(
         user => {
@@ -30,5 +29,12 @@ router.post('/register', function (req, res) {
           res.send(results);
        });
 })
+
+router.post('/updateBlog', function (req, res) {
+  model.updateHandler(req.body)
+       .then(results => {
+           res.send(results);
+        });
+ })
 
 module.exports = router
