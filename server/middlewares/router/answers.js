@@ -2,21 +2,21 @@ const router = require('express').Router(),
 model = require('./../../model'),
 tokenVerify = require('./../tokenVerify');
 
-router.get(['/', '/getAllQuestions', '/getQuestionsByID/:questionsID'], tokenVerify, function (req, res) {
+router.get(['/', '/getAllAnswers', '/getAnswersByID/:answersID'], tokenVerify, function (req, res) {
     if(req.params && req.params.questionsID){
         var cond = {
           questionsID : req.params.questionsID
         }
     }
-    model.getQuestions(cond || {})
+    model.getAnswers(cond || {})
     .then(
     results => {
         res.json(results); 
     });      
 });
 
-router.post('/createNewQuestion', tokenVerify, function (req, res) {
-    model.createNewQuestion(req.body)
+router.post('/createNewAnswer', tokenVerify, function (req, res) {
+    model.createNewAnswer(req.body)
     .then(
       results => {
         res.json(results);   
