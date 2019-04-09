@@ -8,18 +8,19 @@ router.use('/questions', require('./questions'));
 router.use('/answers', require('./answers'));
 
 router.get('/login', function (req, res) {
+  console.log('req.body', req.body);
  model.login(req.body)
       .then(
         user => {
-          if(user){
-            res.setHeader('Authentication', jwt.sign({ userID: user.userID, username: user.username }, 
-              'MY_SECRET_KEY', { expiresIn: '30m' }));
+          if(user.errMsg) throw user.errMsg;
+            console.log('user', user);
               res.json({
                 success: true,
                 userID: user.userID,
-                message: 'Authentication successful!'
+                message: 'Authentication successful!',
+                token: jwt.sign({ userID: user.userID, username: user.username }, 'MY_SECRET_KEY', { expiresIn: '30m' })
               });                
-          }  
+            
         });
 });
 

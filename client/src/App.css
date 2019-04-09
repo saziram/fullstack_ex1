@@ -1,3 +1,39 @@
+.react-modal-header {
+  justify-content: space-between;
+  padding: 5px 5px;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: .3rem;
+  border-top-right-radius: .3rem;  
+}
+
+.modal-body .input-group-text{
+  width: 125px
+}
+
+.authentication button{
+  margin: 5px;
+}
+
+.react-modal {  
+opacity: 1;
+left: calc(40% - 100px);
+top: calc(40% - 100px);
+position: absolute;
+z-index: 1050;
+
+width: 400px;
+overflow: hidden;
+outline: 0;
+}
+
+.top-bar{
+  line-height: 3;
+  background-color: #fafafb;
+  box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 6px rgba(59,64,69,0.1);  
+}
+.align-right{
+  float: right;
+}
 .App {
   text-align: center;
 }
