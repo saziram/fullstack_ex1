@@ -180,13 +180,7 @@ function sequenceGenerator(field){
 	});							
 }
 
-const model = {
-	Users: mongoose.model('Users', users),
-	Topics : mongoose.model('Topics', topics),
-	Questions : mongoose.model('Questions', questions),
-	Answers: mongoose.model('Answers', answers),
-	Comments: mongoose.model('Comments', comments)
-}
+
 
 function getUserID(userID){	
 	return model.Users.findOne({userID: userID}, 
@@ -200,23 +194,28 @@ users.pre('save', function(next) {
 	var user = this;
     if (!user.isModified('password')) return next();
     // generate a salt
-    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-        if (err) return next(err);
-        bcrypt.hash(user.password, salt, async (err, hash) => {
-			if (err) return next(err);
-				user.password = hash;
-				next();	
-			});
-    });
+	bcrypt.hash(user.password, bcrypt.genSaltSync(SALT_WORK_FACTOR), async (err, hash) => {
+		if (err) return next(err);
+		user.password = hash;
+		next();	
+	});
 });
 
 users.methods.validatePassword = function(candidatePassword) {
 	return new Promise( (resolve, reject) => {
-		bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {			
+		bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {		
 			if(isMatch) resolve(this);
 			reject(err);
 		});
 	});
+}
+
+const model = {
+	Users: mongoose.model('Users', users),
+	Topics : mongoose.model('Topics', topics),
+	Questions : mongoose.model('Questions', questions),
+	Answers: mongoose.model('Answers', answers),
+	Comments: mongoose.model('Comments', comments)
 }
 
 //export model

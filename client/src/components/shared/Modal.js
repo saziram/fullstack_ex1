@@ -27,35 +27,21 @@ handleClose(e) {
 
 handleSubmit(e){
     e.preventDefault();
-    const auth = {
+    let auth = {
         username: this.state.username,
-        password: this.state.password
-    }
-    console.log('auth', auth);
-    axios({
-        url: 'http://localhost:4000/login',
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        data: {
-            username: this.state.username,
-            password: this.state.password
-        }     
-    })
+        password: this.state.password        
+    };
+
+    axios.post('http://localhost:4000/' + this.props.modalName.toLowerCase(), auth)  
     .then(res => {
-        if(res.data){
-            localStorage.setItem('authentication', JSON.stringify(res.data.token));
-            console.log('this.props.unmountModal();', res.data);
-            //this.props.unmountModal();
-        }
+        if(res.data.errCode) throw res.data.errMsg;
+        localStorage.setItem('authentication', JSON.stringify({...res.data, username:this.state.username }));
+        this.props.unmountModal({...res.data, username:this.state.username });
     })
-    .catch( err => {
-        if(err.response){
-            console.log(err);          
-        }
-    }); 
+    .catch(error => {
+        alert(error);
+        console.log(error);
+    });
 }
 
 handleChange(e){
@@ -116,11 +102,11 @@ render() {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text" id="basic-addon3">Password: </span>
                                 </div>
-                                <input type="text" onChange={this.handleChange} name="password" value={this.state.password} className="form-control" id="basic-url" aria-describedby="basic-addon3" />
+                                <input type="password" onChange={this.handleChange} name="password" value={this.state.password} className="form-control" id="basic-url" aria-describedby="basic-addon3" />
                             </div>
                             <div className="row justify-content-end">
                                 <div className="col-3">
-                                    <button type="submit" className="btn btn-success">{this.props.modalName}</button>
+                                    <button type="submit" disabled={!this.state.username || !this.state.password} className="btn btn-success">{this.props.modalName}</button>
                                 </div>
                                 <div className="col-3">
                                     <button onClick={this.handleReset} type="button" className="btn btn-dark">Reset</button>

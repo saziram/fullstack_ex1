@@ -1,3 +1,60 @@
+nav a{
+  margin-right: 10px;
+}
+
+.nav-pills .nav-link.active {
+  color: #204d7b;
+  background-color: #007bff73;
+}
+
+.tags {
+  margin-top: 15px;
+}
+
+.mini-counts{
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;  
+  margin: auto 0px;
+}
+
+.questions {
+  left: 15px;
+}
+
+.cards {  
+  display: inline-block;
+  margin: 0 15px 0 0;
+  height: auto;
+  font-size: 15px;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  border-color: rgba(69,161,99,0.5);
+  color: #45A163;
+  text-align: center;
+}
+
+.questions-summary {
+  padding: 15px;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.active-nav{
+  font-weight: bold;
+  background: rgba(12,13,14,0.05);
+  color: #0C0D0E;
+  border-right: 3px solid #007bff;  
+}
+
+.content-border{
+  padding-left: 0px;
+  border-left: 1px solid #c7c7c7;
+}
+.sidebar {
+  height: -webkit-fill-available;
+  padding-right: 0px;
+}
 .react-modal-header {
   justify-content: space-between;
   padding: 5px 5px;

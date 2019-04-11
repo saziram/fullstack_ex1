@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 module.exports = function verifyToken (req, res, next) {
     const bearerHeader = req.headers['authorization'];
     process.env.USER_ID = req.headers['userid'];
+    console.log('entered');
     if(typeof bearerHeader !== 'undefined') {
       const bearer = bearerHeader.split(' ');
       const bearerToken = bearer[1];

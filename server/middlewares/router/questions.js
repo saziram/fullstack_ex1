@@ -2,7 +2,7 @@ const router = require('express').Router(),
 model = require('./../../model'),
 tokenVerify = require('./../tokenVerify');
 
-router.get(['/', '/getAllQuestions', '/getQuestionsByID/:questionsID'], tokenVerify, function (req, res) {
+router.get(['/', '/getAllQuestions', '/getQuestionsByID/:questionsID'], function (req, res) {
     if(req.params && req.params.questionsID){
         var cond = {
           questionsID : req.params.questionsID
